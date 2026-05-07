@@ -1,0 +1,52 @@
+Q1. set user:1:name "Alice"
+
+Q2. SET  user:1:loginCount 0
+    INCR user:1:loginCount
+    INCR user:1:loginCount
+    INCR user:1:loginCount
+    INCR user:1:loginCount
+
+Q3.SET session:abc "user_data_here" EX 1800
+
+Q4.TTL session:abc
+
+Q5.EXISTS user:1:email
+   DEL user:1:email
+
+Q6. -1 means the key doesn't have an Expiry. -2 means the key is not EXISTS
+
+Q7. LPUSH notification:user:1 "You have a new message"
+    RPUSH notification:user:1 "Your order has shipped"
+    RPUSH notification:user:1 "Password changed successfully"
+
+Q8. LRANGE notification:user:1 0 -1
+
+Q9. LRANGE taskQueue 0 2
+
+Q10. HSET user:201 name "Bob" email "bob@example.com" age "34" role "developer"
+
+Q11. HGET user:201 email
+
+Q12. HGETALL user:201
+
+Q13.HEXISTS  user:201 phone
+    HSET user:201 phone "9876543210"
+    HGETALL user:201
+
+Q14. SADD online:users "alice" "bob" "carol" "alice"
+
+Q15.SREM online:users "bob"
+    SCARD online:users
+
+Q16. SADD page:about:viewers "carol" "david" "eve"
+     SINTER page:home:viewers page:about:viewers
+     
+Q17. ZADD leaderboard:game1 1500 "alice" 2300 "bob" 800 "carol" 3100 "david" 1900 "eve"
+
+Q18. ZREVRANGE leaderboard:game1 0 -1 WITHSCORES
+
+Q19. SCAN returns cursor of key instead of whole keys like KEY *
+    OBJECT IDLETIME return seconds when the key last accessed
+
+
+

@@ -1,0 +1,173 @@
+Q1. use products
+
+Q2.
+ db.products.insertOne({
+  name: "Wireless Mouse",
+  brand: "Logitech",
+  price: 29.99,
+  category: "Electronics",
+  stock: 150,
+  rating: 4.5
+})
+
+Q3.
+db.products.insertMany([
+ { name: "Mechanical Keyboard", brand: "Corsair", price: 89.99, category: "Electronics", stock: 60, rating: 4.7 },
+ { name: "USB-C Hub", brand: "Anker", price: 35.00, category: "Electronics", stock: 200, rating: 4.3 },
+ { name: "Desk Lamp", brand: "BenQ", price: 109.99, category: "Office", stock: 45, rating: 4.6 }
+ ])
+
+ Q4.
+ db.products.find()
+
+ Q5.
+ db.products.findOne({
+  name:"Wireless Mouse"
+})
+
+Q6.
+db.products.updateOne(
+    {name:"USB-C Hub"},
+    {$set:{stock:180}}
+)
+
+Q7.
+db.products.updateMany(
+  {category:"Electronics"},
+  {$set:{onSale:true}}
+)
+
+Q8.
+db.products.deleteOne(
+  {name:"Desk Lamp"}
+)
+
+Q9.
+db.products.find(
+  {price : {$gt: 30}}
+)
+
+Q10.
+db.products.find(
+  {rating: {$gt: 4.4, $lte:4.8}}
+)
+
+Q11.
+db.products.find(
+  {category : {$in: ["Electronics", "Office"]}}
+)
+
+Q12.
+db.products.find(
+  {onSale: {$exists : true}}
+)
+
+Q13.
+db.products.find(
+  {
+     price:{$lt : 100},
+  stock : {$gt : 100}
+  },
+  {
+    name:1,
+    price:1,
+    stock:1,
+    _id:0
+  }
+)
+
+Q14.
+db.products.find().sort({price: 1})
+
+Q15.
+db.products.find().sort({rating:-1}).limit(2)
+
+Q16.
+db.products.find().sort({price:1}).skip(1).limit(2);
+
+Q17.
+db.products.createIndex({name : 1})
+
+Q18.
+Mongodb server throws error of duplicate Key error
+
+Q19.
+db.employees.aggregate([
+  {
+    $group:{
+      _id:"$department",
+      totalEmployees : {$sum : 1}
+    }
+  }
+])
+
+Q20.
+db.employees.aggregate([
+  {
+    $group:{
+      _id : "$department",
+      avgSalary :{$avg : "$salary"}
+    }
+  },{
+    $sort : {avgSalary : -1}
+  }
+])
+
+Q21.
+db.employees.aggregate([
+  {
+    $match:{status:"active"}
+  },
+  {
+    $group:{
+      _id:"$department",
+      totalBudgetSalary: {$sum : "$salary"}
+    }
+  }
+])
+
+Q22.
+db.employees.find({} ,{
+  name:1,
+  role:1,
+  department:1,
+  salary:1
+}).sort({
+  salary : -1
+}).limit(3)
+
+Q23.
+db.employees.aggregate([
+  {
+    $group:{
+      _id:"$department",
+      count:{$sum : 1}
+    }
+  },
+  {
+    $match:{count : {$gt : 2}}
+  },
+  {
+    $sort : {count : -1}
+  },
+  {
+    $project:{
+      _id:0,
+      department : "$_id",
+      count:1
+    }
+  }
+])
+
+Q24.
+db.employees.aggregate([
+  {
+    $group:{
+      _id:"$department",
+      maxSalary : {$max : "$salary"},
+      minSalary : {$min : "$salary"}
+    }
+  }
+])
+
+Q25.

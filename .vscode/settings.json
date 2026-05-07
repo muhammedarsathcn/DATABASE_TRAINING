@@ -1,0 +1,13 @@
+{
+    "cSpell.words": [
+        "HEXISTS",
+        "HGET",
+        "HGETALL",
+        "LPUSH",
+        "LRANGE",
+        "RPUSH",
+        "SREM",
+        "WITHSCORES",
+        "ZADD"
+    ]
+}

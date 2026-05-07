@@ -1,4 +1,4 @@
-Q1. use products
+Q1. use shopDB
 
 Q2.
  db.products.insertOne({
@@ -150,13 +150,6 @@ db.employees.aggregate([
   {
     $sort : {count : -1}
   },
-  {
-    $project:{
-      _id:0,
-      department : "$_id",
-      count:1
-    }
-  }
 ])
 
 Q24.
@@ -171,3 +164,10 @@ db.employees.aggregate([
 ])
 
 Q25.
+$lookup -> to combine two different collections which consists of(from, localField, foreignField, as)
+$unwind -> it deconstructs an array field into separate documents
+eg: {
+  name:"Alice",                           { name: "Alice", hobbies:"Playing"}
+  hobbies :["Playing", "Music"]      ->   { name: "Alice", hobbies:"Music"}
+}
+$watch -> it is used to listen the real-time changes in the database, collections like insert, delete, update and trigger some

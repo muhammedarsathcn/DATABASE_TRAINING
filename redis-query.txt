@@ -1,14 +1,18 @@
 Q1. set user:1:name "Alice"
+    get user:1:name
 
 Q2. SET  user:1:loginCount 0
     INCR user:1:loginCount
     INCR user:1:loginCount
     INCR user:1:loginCount
     INCR user:1:loginCount
+    get user:1:loginCount
 
 Q3.SET session:abc "user_data_here" EX 1800
 
 Q4.TTL session:abc
+   PERSISTS session:abc
+   TTL session:abc -> returns -1
 
 Q5.EXISTS user:1:email
    DEL user:1:email
@@ -21,7 +25,13 @@ Q7. LPUSH notification:user:1 "You have a new message"
 
 Q8. LRANGE notification:user:1 0 -1
 
-Q9. LRANGE taskQueue 0 2
+Q9. 
+LPUSH taskQueue "task1"
+LPUSH taskQueue "task2"
+LPUSH taskQueue "task3"
+LPUSH taskQueue "task4"
+LPUSH taskQueue "task5"
+LRANGE taskQueue 0 2
 
 Q10. HSET user:201 name "Bob" email "bob@example.com" age "34" role "developer"
 
@@ -38,7 +48,9 @@ Q14. SADD online:users "alice" "bob" "carol" "alice"
 Q15.SREM online:users "bob"
     SCARD online:users
 
+
 Q16. SADD page:about:viewers "carol" "david" "eve"
+     SADD page:home:viewers "carol" "alice" "bob"
      SINTER page:home:viewers page:about:viewers
      
 Q17. ZADD leaderboard:game1 1500 "alice" 2300 "bob" 800 "carol" 3100 "david" 1900 "eve"
